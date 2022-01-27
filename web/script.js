@@ -5,24 +5,104 @@ function on() {
   function off() {
     document.getElementById("blackopacity").style.display = "none";
   }
+const myImage = document.getElementById("myImage");
+const myTitle = document.getElementById("myTitle");
+const myInput = document.getElementById("myInput");
 
+const knopslavery = document.getElementById('Slavery');
+const knopJohannes = document.getElementById('Johannes');
+const knopvergeet = document.getElementById('vergeet');
+const knoprembrandt = document.getElementById('Rembrandt');
+const knophogelucht = document.getElementById('Hogelucht');
 
-//Get the button:
-mybutton = document.getElementById("myBtn");
+let directionButtons = {
+  "Slavery": document.getElementById('Slavery'),
+  "johannes": document.getElementById('Johannes'),
+  "vergeet": document.getElementById('vergeet'),
+  "rembrandt": document.getElementById('Rembrandt'),
+  "hogelucht": document.getElementById('Hogelucht')
 
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+}
+let current_index = 0;
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
+let locaties = [
+    {
+        "titel":"Slavernij",
+        "image":"img/slavery1.jpeg",
+        "directions" : {
+          "Slavery": 1
+        }
+    },
+    {
+        "titel":"Slavernij",
+        "image":"img/slaver2.jpeg",
+        "directions" : {
+          "Slavery": 1
+        }
+    },
+    {
+        "titel":"Johannes Vermeer",
+        "image":"BL.png",
+         
+    },
+    {
+        "titel":"Vergeet me niet",
+        "image":"img/vergeetmenietportretten2.jpeg",
+        "directions" : {
+          "vergeet" : 3
+        }
+    },
+    {
+        "titel":"Rembrandt",
+        "image":"rembrandtgoat.png",
+    },
+    {
+        "titel":"Hogelucht",
+        "image":"mannenboottings.jpg",
+    },
+    
+];
+function show(index){
+  myTitle.innerHTML = locaties[index].titel;
+  myImage.src = lokaties[index].image;
+  current_index = index;
+    
+  
+  updateDirections()
+}
+
+function updateDirections(){
+  
+  let possible = locaties[current_index].directions;
+
+  let possible_keys = Object.keys(possible);
+
+  console.log(possible);
+  console.log(possible_keys);
+
+  let button_keys = object.keys(directionButtons);
+
+  for(const key of button_keys ){
+    directionButtons[key].style.visibility = "hidden";
+
   }
+
+  for(const key of possible_keys){
+    directionButtons[key].style.visibility ='visible';
+  }
+
+}
+function getInput(){
+  show(myinput.value);
+
+  myinput.value = "";
+
+  myinput.focus();
+    
 }
 
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+function goDirection(direction){
+  let punt_index = locaties[current_index].directions[richting]
+    show(punt_index);
 }
+show(0);
